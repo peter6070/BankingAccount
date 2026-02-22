@@ -17,6 +17,17 @@ Account::Account(const Account& copy)
 	strcpy_s(cusName, len, copy.cusName);
 }
 
+Account& Account::operator=(const Account& ref) {
+	id = ref.id;
+	balance = ref.balance;
+
+	int len = strlen(ref.cusName) + 1;
+	cusName = new char[len];
+	strcpy_s(cusName, len, ref.cusName);
+
+	return *this;
+}
+
 int Account::GetAccID() const {
 	return id;
 }

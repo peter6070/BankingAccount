@@ -8,6 +8,7 @@ class Account {
 public:
 	Account(int myId, char* nameStr, int myBalance);
 	Account(const Account& copy);
+	Account& operator=(const Account& ref);
 
 	int GetAccID() const;
 	virtual void Deposit(int money);

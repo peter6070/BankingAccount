@@ -79,7 +79,6 @@ void AccountHandler::MakeHighCreditAccount() {
 		accArr[accNum++] = new HighCreditAccount(id, name, balance, interestRate, LEVEL_C);
 		break;
 	}
-
 }
 
 //입금
