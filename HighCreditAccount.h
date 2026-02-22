@@ -1,12 +1,13 @@
 #pragma once
 #include "NormalAccount.h"
+#include "String.h"
 
 //신용신뢰계좌
 class HighCreditAccount : public NormalAccount {
 private:
 	int specialRate;
 public:
-	HighCreditAccount(int myId, char* nameStr, int myBalance, int myInterRate, int special)
+	HighCreditAccount(int myId, String nameStr, int myBalance, int myInterRate, int special)
 		: NormalAccount(myId, nameStr, myBalance, myInterRate), specialRate(special) {
 	}
 	virtual void Deposit(int money) {

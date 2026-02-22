@@ -3,6 +3,7 @@
 #include "Account.h"
 #include "NormalAccount.h"
 #include "HighCreditAccount.h"
+#include "String.h"
 
 //메뉴 출력
 void AccountHandler::PrintMenu() const {
@@ -38,7 +39,7 @@ void AccountHandler::MakeAccount() {
 //보통예금계좌 개설
 void AccountHandler::MakeNormalAccount() {
 	int id;
-	char name[100];
+	String name;
 	int balance;
 	int interestRate;
 
@@ -54,7 +55,7 @@ void AccountHandler::MakeNormalAccount() {
 //신용신뢰계좌 개설
 void AccountHandler::MakeHighCreditAccount() {
 	int id;
-	char name[100];
+	String name;
 	int balance;
 	int interestRate;
 	int trustLevel;
