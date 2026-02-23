@@ -1,4 +1,3 @@
-//미사용 파일(계좌 관리 프로그램 0.9까지 사용)
 #include "BankingCommonDecl.h"
 #include "AccountArray.h"
 #include "Account.h"

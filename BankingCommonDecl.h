@@ -1,17 +1,11 @@
-/*
-* File: BankingCommonDecl.h
-* Writer: KJ
-* Update Info: [2026.2.23.] ver 1.0
-* BoundCheckAccountPtrArray 클래스를 클래스 템플릿으로 정의
-* 
-*/
-
-
 #pragma once
 #include <iostream>
 #include <string>
 #include <cstdlib>
 using namespace std;
+
+//계좌 관리 프로그램 0.9
+// String class 적용
 
 //최대 고객 수
 const int MAX_CLIENT = 100;
