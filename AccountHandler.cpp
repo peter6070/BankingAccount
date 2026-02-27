@@ -1,3 +1,12 @@
+/*
+* File: BankingCommonDecl.h
+* Writer: KJ
+* Update Info: [2026.2.27.] ver 1.1
+* 예금된 금액보다 많은 금액 출금을 요구하는 예외상황 처리
+* 입출금 진행 시 프로그램 사용자로부터 0보다 작은 값이 입력되는 예외상황 처리
+*
+*/
+
 #include "BankingCommonDecl.h"
 #include "AccountHandler.h"
 #include "Account.h"
@@ -92,14 +101,24 @@ void AccountHandler::Deposit() {
 	cin >> searchID;
 	for (int i = 0; i < accNum; i++) { //id 찾기
 		if (searchID == accArr[i]->GetAccID()) {
-			cout << "Deposit amount: ";
-			cin >> changeAmount;
-			accArr[i]->Deposit(changeAmount);
-			cout << "Deposit Complete" << endl;
-			return;
+			//입출금 진행 시 프로그램 사용자로부터 0보다 작은 값이 입력되는 예외상황 처리
+			while (true) {
+				cout << "Deposit amount: ";
+				cin >> changeAmount;
+				try {
+					accArr[i]->Deposit(changeAmount);
+					cout << "Deposit Complete" << endl<<endl;
+					return;
+				}
+				catch (MinusException& expt) {
+					expt.ShowExceptionInfo();
+					cout << "Reenter Deposit" << endl<<endl;
+				}
+			}
 		}
 	}
 	cout << "ID Not Found" << endl;
+
 }
 
 //출금
@@ -112,14 +131,27 @@ void AccountHandler::Withdraw() {
 	cin >> searchID;
 	for (int i = 0; i < accNum; i++) { //id 찾기
 		if (searchID == accArr[i]->GetAccID()) {
-			cout << "Withdrawal amount: ";
-			cin >> changeAmount;
-			if (accArr[i]->Withdraw(changeAmount) == 0) {
-				cout << "Balance shortage" << endl;
-				return;
+			//입출금 진행 시 프로그램 사용자로부터 0보다 작은 값이 입력되는 예외상황 처리
+			while (true) {
+				cout << "Withdrawal amount: ";
+				cin >> changeAmount;
+				try {
+					if (accArr[i]->Withdraw(changeAmount) == 0) {
+						cout << "Balance shortage" << endl;
+						return;
+					}
+					cout << "Withdrawal Complete" << endl << endl;
+					return;
+				}
+				catch (MinusException& expt) {
+					expt.ShowExceptionInfo();
+					cout << "Reenter Deposit" << endl << endl;
+				}
+				catch (InsuffException& expt) {
+					expt.ShowExceptionInfo();
+					cout << "Reenter Withdrawal" << endl << endl;
+				}
 			}
-			cout << "Withdrawal Complete" << endl;
-			return;
 		}
 	}
 	cout << "ID Not Found" << endl;

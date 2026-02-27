@@ -11,6 +11,8 @@ public:
 		: NormalAccount(myId, nameStr, myBalance, myInterRate), specialRate(special) {
 	}
 	virtual void Deposit(int money) {
+		if (money < 0)
+			throw MinusException(money);
 		NormalAccount::Deposit(money); //원금, 이자 추가
 		Account::Deposit(money * (specialRate / 100.0)); //특별이자 추가
 	}

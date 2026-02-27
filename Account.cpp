@@ -1,6 +1,16 @@
+/*
+* File: BankingCommonDecl.h
+* Writer: KJ
+* Update Info: [2026.2.27.] ver 1.1
+* 예금된 금액보다 많은 금액 출금을 요구하는 예외상황 처리
+* 입출금 진행 시 프로그램 사용자로부터 0보다 작은 값이 입력되는 예외상황 처리
+*
+*/
+
 #include "BankingCommonDecl.h"
 #include "Account.h"
 #include "String.h"
+#include "AccountException.h"
 
 Account::Account(int myId, String nameStr, int myBalance)
 	:id(myId), balance(myBalance)
@@ -36,14 +46,18 @@ int Account::GetAccID() const {
 	return id;
 }
 void Account::Deposit(int money) {
+	if (money < 0)
+		throw MinusException(money);
 	balance += money;
 }
 int Account::Withdraw(int money) {
+	if (money < 0)
+		throw MinusException(money);
 	if (balance < money)
-		return 0;
+		throw InsuffException(balance, money);
 	balance -= money;
 
-	return balance;
+	return money;
 }
 void Account::ShowAccInfo() const {
 	cout << "\nAccount ID: " << id << endl;
